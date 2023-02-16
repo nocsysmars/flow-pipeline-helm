@@ -1,0 +1,32 @@
+{{- if .Values.cleanup.enabled }}
+{{- if (index .Values "altinity-clickhouse-operator" "enabled") }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-cleanup
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": pre-delete
+    "helm.sh/hook-weight": "3"
+    "helm.sh/hook-delete-policy": hook-succeeded
+  labels:
+    app: {{ .Release.Name }}-cleanup
+spec:
+  template:
+    metadata:
+      name: {{ .Release.Name }}-cleanup
+      labels:
+        app: {{ .Release.Name }}-cleanup
+    spec:
+      containers:
+        - name: kubectl
+          image: "{{ .Values.hyperkubeImage.repository }}:{{ .Values.hyperkubeImage.tag }}"
+          imagePullPolicy: "{{ .Values.hyperkubeImage.pullPolicy }}"
+          command:
+          - /bin/sh
+          - -c
+          - >
+              kubectl -n {{.Release.Namespace}} patch clickhouseinstallations.clickhouse.altinity.com/{{.Release.Name}}-{{index .Values "clickhouse-instance" "name-suffix"}} -p '{"metadata":{"finalizers":[]}}' --type=merge
+      restartPolicy: OnFailure
+{{- end }}
+{{- end }}

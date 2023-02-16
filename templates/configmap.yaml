@@ -1,0 +1,19 @@
+{{- $files := .Files }}
+{{- range $key, $value := .Files }}
+{{- if hasPrefix "clickhouse/" $key }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  {{- if contains "create.sh" $key }}
+  name: {{ $.Release.Name }}-cm-initdb
+  {{- else if contains "flow.proto" $key }}
+  name: {{ $.Release.Name }}-cm-proto
+  {{- end }}  
+  namespace: {{ $.Release.Namespace }}
+data:
+{{ tpl ($.Files.Glob $key).AsConfig $ | indent 2 }}
+{{- end }}
+{{- end }}
+
+## files come from https://github.com/nocsysmars/flow-pipeline/

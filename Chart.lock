@@ -1,0 +1,12 @@
+dependencies:
+- name: goflow
+  repository: file://goflow/
+  version: 0.1.0
+- name: kafka
+  repository: https://charts.bitnami.com/bitnami
+  version: 20.0.6
+- name: altinity-clickhouse-operator
+  repository: https://docs.altinity.com/clickhouse-operator/
+  version: 0.20.3
+digest: sha256:a0f63dc404d7f8aba90fd10912cfed97981fb567092e2a1f9c95604e60fc5e0e
+generated: "2023-02-16T06:35:25.469067034Z"

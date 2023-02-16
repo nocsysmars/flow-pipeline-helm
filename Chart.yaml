@@ -1,0 +1,22 @@
+apiVersion: v2
+name: flow-pipeline-umbrella
+version: 1.0.0 # chart
+appVersion: 1.0.0
+description: Installs goflow, kafka, clickhouse, etc...
+type: application
+keywords:
+  - flow-pipeline
+
+dependencies:
+  - name: goflow
+    repository: "file://goflow/"
+    version: "0.1.0"
+    condition: goflow.enabled
+  - name: kafka
+    repository: "https://charts.bitnami.com/bitnami"
+    version: "20.0.6"
+    condition: kafka.enabled
+  - name: altinity-clickhouse-operator
+    repository: "https://docs.altinity.com/clickhouse-operator/"
+    version: "0.20.3"
+    condition: altinity-clickhouse-operator.enabled

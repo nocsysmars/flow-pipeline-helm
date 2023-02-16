@@ -1,0 +1,51 @@
+apiVersion: "clickhouse.altinity.com/v1"
+kind: ClickHouseInstallation 
+metadata:
+  name: {{ .Release.Name }}-{{index .Values "clickhouse-instance" "name-suffix"}}
+spec:
+  defaults:
+    templates:
+      serviceTemplate: chi-svc-template
+  configuration:
+    users:
+      clickhouse_operator/password: clickhouse_operator_password
+      grafana/password: grafana
+      grafana/profile: default
+      grafana/quota: default
+      grafana/networks/ip: "::/0"
+    clusters:
+      - name: {{ .Release.Name }}-chi
+        templates:
+          podTemplate: db-with-goflow
+        layout:
+          shardsCount: 1
+          replicasCount: 1
+  templates:
+    serviceTemplates:
+    - name: chi-svc-template
+      spec:
+        type: ClusterIP
+    podTemplates:
+    - name: db-with-goflow
+      spec:
+        containers:
+          - name: clickhouse
+            image: clickhouse/clickhouse-server:22.3
+            ports:
+              - name: http
+                containerPort: 8123
+            volumeMounts:
+              - name: volume-initdb
+                mountPath: /docker-entrypoint-initdb.d/
+              - name: volume-proto
+                mountPath: /tmp/flow.proto
+                subPath: flow.proto
+                readOnly: true
+        volumes:
+              - name: volume-initdb
+                configMap:
+                  name: {{.Release.Name}}-cm-initdb
+              - name: volume-proto
+                configMap:
+                  name: {{.Release.Name}}-cm-proto
+

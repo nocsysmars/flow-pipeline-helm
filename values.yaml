@@ -1,0 +1,32 @@
+# Default values for flow-pipeline 
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+goflow:
+  enabled: true
+
+kafka:
+  enabled: true
+  persistence:
+    enabled: false
+  zookeeper:
+    persistence:
+      enabled: false
+
+altinity-clickhouse-operator:
+  enabled: true
+
+clickhouse-instance:
+  name-suffix: "db"
+
+
+# TODO: rbac for cleanup
+cleanup:
+  enabled: false
+
+## Hyperkube image to use when cleaning up
+##
+hyperkubeImage:
+  repository: k8s.gcr.io/hyperkube
+  tag: v1.12.1
+  pullPolicy: IfNotPresent
