@@ -14,11 +14,55 @@ kafka:
       enabled: false
 
 altinity-clickhouse-operator:
-  enabled: true
+  enabled: true 
 
 clickhouse-instance:
   name-suffix: "db"
 
+grafana:
+  enabled: true
+  adminPassword: grafana
+  service:
+    type: NodePort
+
+  plugins: vertamedia-clickhouse-datasource
+
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: ClickHouse
+          type: vertamedia-clickhouse-datasource
+          access: proxy
+          # TODO: how to generate svc name for chi dnamically ???
+          # "db" is clickhouse-instance.name-suffix
+          url: http://chi-{{ .Release.Name }}-db-{{ .Release.Name }}-chi-0-0.{{ .Release.Namespace }}:8123
+          # TODO: how to use other username/password instead of default user ???
+          #basicAuthUser: grafana
+          #basicAtthPassword: grafana
+          #basicAuth: true
+          # TODO: service not ready yet 
+        - name: Prometheus
+          type: prometheus
+          access: proxy
+          url: http://prometheus:9000
+          editable: true
+
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+      - name: 'default'
+        orgId: 1
+        folder: ''
+        type: file
+        disableDeletion: false
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/default
+
+  dashboardsConfigMaps:
+    default: "grafana-dashboards"
 
 # TODO: rbac for cleanup
 cleanup:

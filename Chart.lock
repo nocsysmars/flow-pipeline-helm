@@ -8,5 +8,8 @@ dependencies:
 - name: altinity-clickhouse-operator
   repository: https://docs.altinity.com/clickhouse-operator/
   version: 0.20.3
-digest: sha256:a0f63dc404d7f8aba90fd10912cfed97981fb567092e2a1f9c95604e60fc5e0e
-generated: "2023-02-16T06:35:25.469067034Z"
+- name: grafana
+  repository: https://grafana.github.io/helm-charts
+  version: 6.50.7
+digest: sha256:7b67c23168d2a3076282e6e1a9545e2c0c185482cf1fee65f362dd2be00593d6
+generated: "2023-02-17T08:00:10.996581887Z"

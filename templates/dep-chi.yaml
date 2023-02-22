@@ -5,9 +5,12 @@ metadata:
 spec:
   defaults:
     templates:
-      serviceTemplate: chi-svc-template
+      serviceTemplate: chi-service-template
   configuration:
     users:
+      default/password: ""
+      default/profile: default
+      default/networks/ip: "::/0"
       clickhouse_operator/password: clickhouse_operator_password
       grafana/password: grafana
       grafana/profile: default
@@ -22,7 +25,7 @@ spec:
           replicasCount: 1
   templates:
     serviceTemplates:
-    - name: chi-svc-template
+    - name: chi-service-template
       spec:
         type: ClusterIP
     podTemplates:

@@ -20,3 +20,7 @@ dependencies:
     repository: "https://docs.altinity.com/clickhouse-operator/"
     version: "0.20.3"
     condition: altinity-clickhouse-operator.enabled
+  - name: grafana
+    repository: "https://grafana.github.io/helm-charts"
+    version: "6.50.7"
+    condition: grafana.enabled
