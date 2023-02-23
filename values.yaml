@@ -7,11 +7,17 @@ goflow:
 
 kafka:
   enabled: true
+
   persistence:
     enabled: false
+
   zookeeper:
     persistence:
       enabled: false
+    resources:
+      limits:
+        memory: 256Mi
+        cpu: 250m
 
 altinity-clickhouse-operator:
   enabled: true
@@ -21,6 +27,7 @@ clickhouse-instance:
 
 grafana:
   enabled: true
+
   adminPassword: grafana
   service:
     type: NodePort
@@ -67,6 +74,7 @@ grafana:
 
 prometheus:
   enabled: true
+
   extraScrapeConfigs: |
     - job_name: 'goflow'
       static_configs:
@@ -85,9 +93,9 @@ prometheus:
   prometheus-pushgateway:
     enabled: false
 
-# TODO: rbac for cleanup
+# cleanup job to remove clickhouse CRD
 cleanup:
-  enabled: false
+  enabled: true
 
 ## Hyperkube image to use when cleaning up
 ##

@@ -33,7 +33,7 @@ spec:
             - '-c'
             - >-
               sleep 15; /goflow -kafka.brokers
-              {{.Release.Name}}-kafka.{{.Release.Namespace}}.svc.cluster.local:9092
+              {{.Release.Name}}-kafka.{{.Release.Namespace}}:9092
               -kafka.topic flows -proto.fixedlen=true
           ports:
             - name: metric

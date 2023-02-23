@@ -25,7 +25,7 @@ clickhouse client -n <<-EOSQL
         Packets UInt64
     ) ENGINE = Kafka()
     SETTINGS
-        kafka_broker_list = '{{.Release.Name}}-kafka.{{.Release.Namespace}}.svc.cluster.local:9092',
+        kafka_broker_list = '{{.Release.Name}}-kafka.{{.Release.Namespace}}:9092',
         kafka_topic_list = 'flows',
         kafka_group_name = 'clickhouse',
         kafka_format = 'Protobuf',

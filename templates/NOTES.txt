@@ -3,13 +3,14 @@ To uninstall/delete the {{.Release.Name}} resources:
 
 helm uninstall {{.Release.Name}} -n {{.Release.Namespace}}
 
-The command above removes all the Kubernetes components 
-associated with the chart and deletes the release except 
+The command above removes all the Kubernetes components
+associated with the chart and deletes the release except
 for ClickHouse CRD resources due to finalizers.
 
-To delete resources accociated to ClickHouseInstallations instance:
+To delete resources associated to ClickHouseInstallations instance
+manually (when {{.Release.Name}}-cleanup job failed):
 
 kubectl -n {{.Release.Namespace}} patch \
-  clickhouseinstallations.clickhouse.altinity.com/{{.Release.Name}}-{{index .Values "clickhouse-instance" "name-suffix"}}\
-  -p '{"metadata":{"finalizers":[]}}' --type=merge 
+  clickhouseinstallations.clickhouse.altinity.com/{{.Release.Name}}-{{index .Values "clickhouse-instance" "name-suffix"}} \
+  -p '{"metadata":{"finalizers":[]}}' --type=merge
 
