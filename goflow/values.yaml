@@ -12,14 +12,15 @@ image:
 
 service:
   type: NodePort
+  metric:
+    protocol: TCP
+    port: 8080
   sflow:
     protocol: UDP
     port: 6343
-    type: NodePort
   nflow:
     protocol: UDP 
     port: 2055
-    type: NodePort
 
 ingress:
   enabled: false

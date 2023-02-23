@@ -8,13 +8,17 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
+    - port: {{ .Values.service.metric.port }}
+      targetPort: {{ .Values.service.metric.port }}
+      protocol: {{ .Values.service.metric.protocol }}
+      name: metric
     - port: {{ .Values.service.sflow.port }}
-      targetPort: {{ .Values.service.sflow.port }} 
+      targetPort: {{ .Values.service.sflow.port }}
       protocol: {{ .Values.service.sflow.protocol }}
       name: sflow
     - port: {{ .Values.service.nflow.port }}
-      targetPort: {{ .Values.service.nflow.port }} 
-      protocol: {{ .Values.service.nflow.protocol }} 
+      targetPort: {{ .Values.service.nflow.port }}
+      protocol: {{ .Values.service.nflow.protocol }}
       name: nflow
   selector:
     {{- include "goflow.selectorLabels" . | nindent 4 }}

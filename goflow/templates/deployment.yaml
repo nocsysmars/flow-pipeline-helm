@@ -36,6 +36,9 @@ spec:
               {{.Release.Name}}-kafka.{{.Release.Namespace}}.svc.cluster.local:9092
               -kafka.topic flows -proto.fixedlen=true
           ports:
+            - name: metric
+              containerPort: 8080
+              protocol: TCP
             - name: sflow 
               containerPort: 6343
               protocol: UDP

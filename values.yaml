@@ -1,4 +1,4 @@
-# Default values for flow-pipeline 
+# Default values for flow-pipeline
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -14,7 +14,7 @@ kafka:
       enabled: false
 
 altinity-clickhouse-operator:
-  enabled: true 
+  enabled: true
 
 clickhouse-instance:
   name-suffix: "db"
@@ -41,11 +41,12 @@ grafana:
           #basicAuthUser: grafana
           #basicAtthPassword: grafana
           #basicAuth: true
-          # TODO: service not ready yet 
+          # TODO: svc name ???
         - name: Prometheus
           type: prometheus
           access: proxy
-          url: http://prometheus:9000
+          orgId: 1
+          url: http://{{ .Release.Name }}-prometheus-server.{{ .Release.Namespace }}
           editable: true
 
   dashboardProviders:
@@ -63,6 +64,26 @@ grafana:
 
   dashboardsConfigMaps:
     default: "grafana-dashboards"
+
+prometheus:
+  enabled: true
+  extraScrapeConfigs: |
+    - job_name: 'goflow'
+      static_configs:
+        - targets:
+          - {{ .Release.Name }}-goflow.{{ .Release.Namespace }}:8080
+
+  alertmanager:
+    enabled: false
+
+  kube-state-metrics:
+    enabled: false
+
+  prometheus-node-exporter:
+    enabled: false
+
+  prometheus-pushgateway:
+    enabled: false
 
 # TODO: rbac for cleanup
 cleanup:
