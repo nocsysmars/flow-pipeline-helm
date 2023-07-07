@@ -3,7 +3,7 @@ entries:
   altinity-clickhouse-operator:
   - apiVersion: v2
     appVersion: 0.20.3
-    created: "2023-07-07T15:12:23.557529084+08:00"
+    created: "2023-07-07T15:30:23.745952569+08:00"
     description: Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).  The
       ClickHouse Operator creates, configures and manages ClickHouse clusters running
       on Kubernetes.
@@ -16,23 +16,23 @@ entries:
     name: altinity-clickhouse-operator
     type: application
     urls:
-    - charts/altinity-clickhouse-operator-0.20.3.tgz
+    - https://github.com/nocsysmars/flow-pipeline-helm/charts/altinity-clickhouse-operator-0.20.3.tgz
     version: 0.20.3
   goflow:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-07-07T15:12:23.557894086+08:00"
+    created: "2023-07-07T15:30:23.749241998+08:00"
     description: A Helm chart for Kubernetes
     digest: 35f4b363c4e7824006b053c85af0deb984f18f27329a54d31bf012b0c9283176
     name: goflow
     type: application
     urls:
-    - charts/goflow-0.1.0.tgz
+    - https://github.com/nocsysmars/flow-pipeline-helm/charts/goflow-0.1.0.tgz
     version: 0.1.0
   grafana:
   - apiVersion: v2
     appVersion: 9.3.6
-    created: "2023-07-07T15:12:23.560856412+08:00"
+    created: "2023-07-07T15:30:23.752989257+08:00"
     description: The leading tool for querying and visualizing time series and metrics.
     digest: b7a515dcfc739b1b995a5216c07535d437652b4865a797f21d4ad1958c8b3952
     home: https://grafana.net
@@ -54,7 +54,7 @@ entries:
     - https://github.com/grafana/grafana
     type: application
     urls:
-    - charts/grafana-6.50.8.tgz
+    - https://github.com/nocsysmars/flow-pipeline-helm/charts/grafana-6.50.8.tgz
     version: 6.50.8
   kafka:
   - annotations:
@@ -62,7 +62,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 3.3.2
-    created: "2023-07-07T15:12:23.574468234+08:00"
+    created: "2023-07-07T15:30:23.765547205+08:00"
     dependencies:
     - condition: zookeeper.enabled
       name: zookeeper
@@ -93,7 +93,7 @@ entries:
     - https://github.com/bitnami/containers/tree/main/bitnami/kafka
     - https://kafka.apache.org/
     urls:
-    - charts/kafka-20.0.6.tgz
+    - https://github.com/nocsysmars/flow-pipeline-helm/charts/kafka-20.0.6.tgz
     version: 20.0.6
   prometheus:
   - annotations:
@@ -105,7 +105,7 @@ entries:
           url: https://github.com/prometheus/prometheus
     apiVersion: v2
     appVersion: v2.41.0
-    created: "2023-07-07T15:12:23.580652484+08:00"
+    created: "2023-07-07T15:30:23.775542209+08:00"
     dependencies:
     - condition: alertmanager.enabled
       name: alertmanager
@@ -149,6 +149,6 @@ entries:
     - https://github.com/kubernetes/kube-state-metrics
     type: application
     urls:
-    - charts/prometheus-19.6.1.tgz
+    - https://github.com/nocsysmars/flow-pipeline-helm/charts/prometheus-19.6.1.tgz
     version: 19.6.1
-generated: "2023-07-07T15:12:23.552310582+08:00"
+generated: "2023-07-07T15:30:23.742627546+08:00"
