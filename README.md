@@ -13,5 +13,9 @@ cd helm-flow-pipe
 helm install {release} -n {namespace} .
 ```
 
+{release} is a string name
+
+grafana default account/password is admin/grafana. If you want to change it, please refer to values.yaml
+
 _See [helm install](https://helm.sh/docs/helm/helm_install/) for command documentation._
 
